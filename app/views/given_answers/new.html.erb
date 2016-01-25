@@ -1,0 +1,94 @@
+    <center><h1><%= @survey.name %> Survey</h1></center>
+    <br><br>
+      <% if @questions.empty? %>
+
+      <div class = "alert alert-danger">
+         <center><h3> Questions not available.</h3></center>
+      </div>
+        <%= link_to surveys_path, class: 'col-lg-1 col-lg-offset-5 btn btn-info' do %>
+        <i class="glyphicon glyphicon-ok-circle"></i> Home
+    <% end %>
+      <% else %>
+    <%= form_tag [@survey, @givenanswer] , { class: 'form-class', id: "html5Form" , role: 'form', method: 'post' } do  %>
+       
+        <%= hidden_field_tag :survey_id, value: @survey.id %>
+
+
+        <% @questions.each_with_index do |question, index| %>
+         <div class="panel-group">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <span class="badge"><%= question.id %></span> <%= question.que_content %></div>
+                <%= hidden_field_tag "total_questions" ,  question.id %>
+              <%#= question.index(question.que_content) %>    
+          <div class="panel-body">
+
+            
+                  <% if question.types == "1" %>
+                      <br>
+
+                      <div class="form-group">
+                          <div class="col-lg-4">
+                    <%= text_field_tag "answer_#{index+1}" , nil , class: 'form-control' , required: true %>
+                    <%= hidden_field_tag "types_#{index+1}" , question.types %>
+                          </div>
+                          <br>
+                      </div>
+                  <% elsif question.types == "2" %>
+                    <br>
+                    <div class="form-group">
+                      <div class="col-lg-4">
+                  <%= text_area_tag "answer_#{index+1}" ,nil ,  class: "form-control" ,required: true %>
+                   <%= hidden_field_tag "types_#{index+1}" , question.types %>
+                  </div>
+                          <br><br>
+                      </div>
+
+                <% elsif question.types == "3" %>
+                      <% question.answer_options.split('\n').each do |option| %>  
+                      <br>
+                           <%= radio_button_tag "answer_#{index+1}" , option , nil ,required: true %> <%= option %>
+                      <% end %>  
+                       <%= hidden_field_tag "types_#{index+1}" , question.types %>
+                    
+
+                  <% elsif  question.types == "4" %>
+
+                       <% question.answer_options.split('\n').each do |option| %> 
+                    <br>
+                      <%= check_box_tag "answer_#{index+1}[]" , option %> <%= option  %>
+                        
+
+                    <% end %>
+                     <%= hidden_field_tag "types_#{index+1}" , question.types %>
+
+                       <br> <br> <br>
+
+                    <%#= check_box_tag "answer_#{index+1}[]",  question.answer_options.split('\n')  %><%#=  question.answer_options.split('\n') %>
+              
+              
+                <% end %>
+             
+                <br>
+              </div>
+              <br>
+          </div>
+          <br>
+        <% end %>
+
+
+        <div class="actions form-group">
+    <div class="col-sm-offset-3 col-sm-3">
+      <%= submit_tag "Submit" ,   class: "btn btn-primary btn-block btn-lg"  %>
+    </div>
+  </div>
+
+        
+<br><br><br><br>
+
+    <% end %>
+    <% end %>
+
+
+        
+

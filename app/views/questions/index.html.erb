@@ -1,0 +1,86 @@
+    <h1>Listing questions</h1>
+
+    <%= form_for survey_question_givenanswer_index_path(@survey ,@questions ,  @attemptsurvey) do |f| %>
+       
+        <%= f.hidden_field :survey_id , value: @survey %>
+
+
+        <% @questions.each do |question| %>
+         <div class="panel-group">
+          <div class="panel panel-primary">
+            <div class="panel-heading"><%= question.que_content %></div>
+
+              <%#= question.index(question.que_content) %>
+
+
+        
+          
+          <div class="panel-body">Panel Content
+
+
+
+
+
+              <% options=question.answer_options.split('\n') %>
+                <% options_size = options.size %>
+                  <% if question.types == "1" %>
+                      <br>
+
+                      <div class="form-group">
+                          <div class="col-lg-4">
+                    <%= f.text_field :answer  , class: "form-control" %>
+                    <%= f.text_field :answer  , class: "form-control" %>
+                          </div>
+                          <br>
+                      </div>
+                  <% elsif question.types == "2" %>
+                    <br>
+                    <div class="form-group">
+                      <div class="col-lg-4">
+                  <%= f.text_area :answer , class: "form-control" %>
+                  </div>
+                          <br><br>
+                      </div>
+
+                <% elsif question.types == "3" %>
+
+                    <% for i in 0...options_size %>      
+                    <br>
+
+                        <%= f.radio_button :answer , value: options[i] %><%= options[i] %>
+                     
+                        
+
+                    <% end %>
+
+                  <% elsif  question.types == "4" %>
+
+                        <% for i in 0...options_size %>      
+                    <br>
+                      <%= f.check_box :answer , value: options[i] %><%= options[i] %> 
+                        
+
+                    <% end %>
+              
+              
+                <% end %>
+              <!--ol>
+                <li></li>
+                <ol-->
+
+            <br>
+                     </div>
+                     <br>
+                    </div>
+               <% end %>
+
+               <div class="form-actions">
+
+                  <%=  f.submit "Submit" , class: "btn btn-success" , "action"=> "attemptsurvey" %>
+
+               </div>
+
+
+               <% end %>
+        
+
