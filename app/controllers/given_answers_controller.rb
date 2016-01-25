@@ -18,40 +18,26 @@ class GivenAnswersController < ApplicationController
      
     def create
 
-
-            #@attempt_questions = GivenAnswer.new(question_attempt_params)
-           # @attempt_questions.save
-
-
-
-
-
-
-        #raise params.inspect
-        total_question = params[:total_question].to_i
-          for i in 1..total_question
-            if params['types_'+i.to_s]== "checkbox"
-              question_answer = params[:given_answer][i.to_s][:answer_options]
-              question_answer.delete('0')
-              question_answer = question_answer.join('\n')
-              @attempt_questions = GivenAnswer.new(:user_id =>current_user.id , :question_id => i , :survey_id => params[:survey_id] , :answer => question_answer)
-              @attempt_questions.save   
-              else
-                question_answer = params[:given_answer][i.to_s][:answer_options]
-                @attempt_questions = GivenAnswer.new(:user_id =>current_user.id , :question_id => i , :survey_id => params[:survey_id] , :answer => question_answer)
-                @attempt_questions.save
-            end
-          end
-          @survey = Survey.find(params[:survey_id])
-          redirect_to survey_given_answers_path(@survey)                 
+          params[:given_answer].each do |question_id, given_answer_attributes|
+              answer=question_attempt_params_check_array_or_not(given_answer_attributes[:answer_options])
+              @attempt_questions = GivenAnswer.new(:user_id =>current_user.id , :question_id =>question_id , :survey_id => params[:survey_id] , :answer =>  answer)
+              @attempt_questions.save
+          end                
     end
 
+    def strip_checkbox_answers(answer)
+        answer.reject(&:blank?).reject { |t| t == "0" }
+    end
     def show   
     end
 
-    def question_attempt_params
-      params["given_answer"].merge!(user_id: current_user.id)
-      raise params[:given_answer].inspect
+    def question_attempt_params_check_array_or_not(answer)
+            answer == if answer.is_a?(Array)
+                stripped_answers = strip_checkbox_answers(answer)
+                answer=stripped_answers.join('\n')
+              else
+                answer
+            end
     
     end   
 
