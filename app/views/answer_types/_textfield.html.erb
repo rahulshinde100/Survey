@@ -1,0 +1,14 @@
+<div class="panel-heading">
+	 <%= hidden_field_tag "types_#{index+1}", answer.types %>
+	<span class="badge"><%= index+1 %></span>  <%= f.label :answer_options, answer.que_content %>
+</div>
+ <div class="panel-body">
+ 	<div class="form-group">
+      <div class="col-lg-4">
+			<%= f.text_field :answer_options , class: "form-control" , required: true %>
+
+	  </div>
+	</div>
+ </div>
+
+<%# end %>

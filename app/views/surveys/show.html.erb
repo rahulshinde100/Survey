@@ -1,9 +1,62 @@
-<p id="notice"><%= notice %></p>
+<h1>Results</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @survey.name %>
-</p>
+<html>
+<head>
 
-<%= link_to 'Edit', edit_survey_path(@survey) %> |
-<%= link_to 'Back', surveys_path %>
+  </head>
+  <body>
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<tr>
+	<th>Question</th>
+	<th>Answers</th>
+	<th>Count</th>
+</tr>
+</tr>
+<%#@cpost.map(&:tags).flatten.map(&:title).uniq.each do |t| %>
+
+<% @question_results.map(&:question).uniq.each do |que| %>
+
+	<tr>
+		<td>
+ 			<%= que.que_content %>
+ 		</td>
+ 		<% @options = GivenAnswer.where(:question_id => que.id) %>
+ 		<td>
+ 				
+ 				<% @options.map(&:answer).uniq.each do |option| %>
+ 					<% if que.types == "checkbox" %>
+ 						<% checkbox_array=option.split('\n') %>
+ 							
+ 						<% checkbox_array.each do |checkbox_ans| %>
+
+							<% if checkbox_ans.empty? %>
+
+								<% else %>
+									<%= checkbox_ans %><br> 
+						
+							<% end %>
+						<% end %>
+
+ 					<% else %>
+ 						<%= option %><br>
+ 					<% end %>
+ 				
+ 			<% end %>
+ 		</td>
+
+ 	<td>
+ 			<% if que.types == "textfield" %>
+ 				<h2>-</h2>
+ 				<% elsif que.types == "textfield" %>
+ 					<h2>-</h2>
+ 				<% else %>
+ 					
+
+ 			<% end %>
+
+ 	</td>
+ </tr>
+<% end %>
+</table>
+</body>
+</html>

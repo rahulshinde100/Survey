@@ -1,0 +1,16 @@
+
+<div class="panel-heading">
+	 <%= hidden_field_tag "types_#{index+1}", answer.types %>
+<span class="badge"><%= index+1 %></span>  <%= f.label :answer_options, answer.que_content %>
+</div>
+ <div class="panel-body">
+	<%= f.fields_for :answer_options do |tf| %>
+  		<%- answer.answer_options.split('\n').each do |option| %>
+    		<%= tf.label option do %>
+      		<%= tf.check_box nil, { id: nil, checked: checkbox_checked?(answer, option) }, option %>
+      		<%= option %>
+    	<% end %>
+    	  <br>
+  	<% end %>
+ 	<% end %>
+</div>

@@ -1,0 +1,15 @@
+<%#= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+<div class="panel-heading">
+	 <%= hidden_field_tag "types_#{index+1}", answer.types %>
+<span class="badge"><%= index+1 %></span>  <%= f.label :answer, answer.que_content %>
+</div>
+ <div class="panel-body">
+<%- answer.answer_options.split('\n').each do |option| %>
+  <%= f.label "answer_text_#{option}", option do %>
+    <%= f.radio_button :answer_options, option %>
+    <%= option %>
+
+  <% end %>
+  <br>
+<% end %>
+</div>

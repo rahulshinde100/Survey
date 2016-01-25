@@ -5,24 +5,15 @@ class SurveysController < ApplicationController
   # GET /surveys
   # GET /surveys.json
   def index
-  
     @surveys = Survey.all
-
-      
-
-
-
-
-
-
-
-
-
   end
 
   # GET /surveys/1
   # GET /surveys/1.json
   def show
+        @survey= Survey.find(params[:id])
+        @question_results =GivenAnswer.where(:survey_id => @survey.id)
+      #raise @question_results.inspect
   end
 
   # GET /surveys/new
@@ -37,13 +28,13 @@ class SurveysController < ApplicationController
   # POST /surveys
   # POST /surveys.json
   def create
-    raise params.inspect
+    #raise params.inspect
     @survey = Survey.new(survey_params)
 
     respond_to do |format|
       if @survey.save
-        format.html { redirect_to @survey, notice: 'Survey was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @survey }
+        format.html { redirect_to surveys_path, notice: 'Survey was successfully created.' }
+        format.json { render action: 'index', status: :created, location: @surveys }
       else
         format.html { render action: 'new' }
         format.json { render json: @survey.errors, status: :unprocessable_entity }

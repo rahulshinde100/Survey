@@ -23,9 +23,11 @@
 	
 <tr>
 		<% sr_no+=1 %>
-		<% if res.question.types == "4" %>
+		<% if res.question.types == "checkbox" %>
 			<td><strong><%= sr_no %></strong></td>
 			<td><strong><%= res.question.que_content %></strong></td>
+
+
 				<% checkbox_array=res.answer.split('\n') %>
 
 				
@@ -45,18 +47,14 @@
 						<% end %>
 					<% end %>
 				<% end %>
-
-
 				</td>
-
 			<% else %>
 				<td><strong><%= sr_no %></strong></td>
 				<td><strong><%= res.question.que_content %></strong></td>
 				<td><%= res.answer %></td>
-		<% end %>
-
-	
-</tr><%  end %>
+			<% end %>	
+		</tr>
+	<%  end %>
 </table>	
 
 <%= link_to surveys_path, class: 'col-lg-2 col-lg-offset-4 btn btn-info' do %>
