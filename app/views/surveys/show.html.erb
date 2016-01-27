@@ -7,16 +7,18 @@
   <body>
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 <tr>
+	<th>Sr. No.</th>
 	<th>Question</th>
 	<th>Answers</th>
 	<th>Count</th>
 </tr>
-</tr>
+
 <%#@cpost.map(&:tags).flatten.map(&:title).uniq.each do |t| %>
-
+<% sr_no=0 %>
 <% @question_results.map(&:question).uniq.each do |que| %>
-
+<% sr_no+=1 %>
 	<tr>
+		<td><strong><%= sr_no %></strong></td>
 		<td>
  			<%= que.que_content %>
  		</td>
