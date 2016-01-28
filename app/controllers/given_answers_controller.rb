@@ -17,7 +17,21 @@ class GivenAnswersController < ApplicationController
 
      
     def create
-      #raise params.inspect
+          
+
+        #raise params.inspect
+
+      #   puts "##############################################"
+      # sample.each do |answer|
+
+      #           puts "answer => #{answer}"
+      #            @attempt_questions = GivenAnswer.new(:user_id =>current_user.id  , :answer =>  answer)
+      #            @attempt_questions.save
+
+      # end
+
+      #test[ "given_answer"].map{|k,v| (v["answer_options"].is_a?(Array)? v["answer_options"].split("0").join('\n').to_s : v["answer_options"].to_s)}
+          #raise params.inspect
           params[:given_answer].each do |question_id, given_answer_attributes|
             answer=given_answer_attributes[:answer_options]
             answer == if answer.is_a?(Array)
@@ -33,6 +47,9 @@ class GivenAnswersController < ApplicationController
           @survey = Survey.find(params[:survey_id])
           redirect_to survey_given_answers_path(@survey)   
 
+    end
+    def sample
+          params[ "given_answer"].map{|k,v| (v["answer_options"].is_a?(Array)? v["answer_options"].split("0").join('\n').to_s : v["answer_options"].to_s)}
     end
 
     def strip_checkbox_answers(answer)
