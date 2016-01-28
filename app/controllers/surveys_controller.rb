@@ -13,6 +13,7 @@ class SurveysController < ApplicationController
   def show
         @survey= Survey.find(params[:id])
         @question_results =GivenAnswer.where(:survey_id => @survey.id)
+        
       #raise @question_results.inspect
   end
 

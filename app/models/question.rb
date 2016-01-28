@@ -3,6 +3,5 @@ class Question < ActiveRecord::Base
 	
 	belongs_to :survey
 	has_many :given_answers 
-	#has_many :given_answers , through: :survey
-	#accepts_nested_attributes_for :given_answers
+	
 end

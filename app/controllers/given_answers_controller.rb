@@ -17,7 +17,7 @@ class GivenAnswersController < ApplicationController
 
      
     def create
-      raise params.inspect
+      #raise params.inspect
           params[:given_answer].each do |question_id, given_answer_attributes|
             answer=given_answer_attributes[:answer_options]
             answer == if answer.is_a?(Array)

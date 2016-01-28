@@ -5,22 +5,21 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+MOBILE_SURVEY = 1
 
-
-Question.create!(que_content: 'Please select your gender group ?' , types: '3' , survey_id: '1', answer_options: 'Female \n Male')
-
-Question.create!(que_content: 'Please select your marital status' , types: '3' , survey_id: '1' ,answer_options: 'Single \n Married ')
-Question.create!(que_content: 'Please select an age group:' , types: '3' , survey_id: '1' ,answer_options: '12-18 \n 19-30 \n 31-40 \n 40-49 \n 50-64 \n 65+ ')
-Question.create!(que_content: 'What type of phone would you like to have ?' , types: '4' , survey_id: '1' ,answer_options: 'Flip Phone \n Slide Phone \n Tough Phone \n Luxury Fashion Phone \n Smart Phone ')
-Question.create!(que_content: 'How important is the design or style (Look and Feel) of a mobile phone to you as opposed to functionality ?' , types: '3' , survey_id: '1' ,answer_options: 'Not Important \n Fairly Important \n Very important \n Extremely important ')
-Question.create!(que_content: 'What size of the handset would you prefer ?' , types: '1' , survey_id: '1' ,answer_options: '')
-Question.create!(que_content: 'What size would you prefer your screen to be ? ' , types: '1' , survey_id: '1' ,answer_options: '')
-Question.create!(que_content: 'How much are you willing to spend on a mobile phone?' , types: '1' , survey_id: '1' ,answer_options: '')
-Question.create!(que_content: 'How many working mobile or cell phones do you currently have?' , types: '1' , survey_id: '1' ,answer_options: '')
-Question.create!(que_content: 'In a typical weekday, about how much time, in total, do you spend using your mobile or cell phone?' , types: '1' , survey_id: '1' ,answer_options: '')
-Question.create!(que_content: 'Which of the following activities do you do on your mobile or cell phone? (Check all that apply)' , types: '4' , survey_id: '1' ,answer_options: 'Take photos \n Play videos (other than video games) \n Send or receive photos \n Send or receive texts \n Play music \n Purchase products or services \n General internet use (other than using social networking websites) \n Send or receive emails \n Record videos \n Play podcasts \n Send or receive videos \n Send or receive instant messages \n Make or receive phone calls \n Play games \n Use social networking websites ')
-Question.create!(que_content: 'Please list 3 media names that you use regularly(whether from TV, magazines, newspapers or websites, such as, TV: Pearl channel, Magazine: Businessweek)' , types: '2' , survey_id: '1' ,answer_options: '')
-Question.create!(que_content: 'In a typical weekday, which of the following activities do you do on your mobile or cell phone most often?' , types: '3' , survey_id: '1' ,answer_options: 'Take photos \n Play videos (other than video games) \n Send or receive photos \n Send or receive texts \n Play music \n Purchase products or services \n General internet use (other than using social networking websites) \n Send or receive emails \n Record videos \n Play podcasts \n Send or receive videos \n Send or receive instant messages \n Make or receive phone calls \n Play games \n Use social networking websites ')
+Question.create!(que_content: 'Please select your gender group ?' , types: 'radiobutton' , survey_id: MOBILE_SURVEY, answer_options: 'Female \n Male')
+Question.create!(que_content: 'Please select your marital status' , types: 'radiobutton' , survey_id: MOBILE_SURVEY ,answer_options: 'Single \n Married ')
+Question.create!(que_content: 'Please select an age group:' , types: 'radiobutton' , survey_id: MOBILE_SURVEY ,answer_options: '12-18 \n 19-30 \n 31-40 \n 40-49 \n 50-64 \n 65+ ')
+Question.create!(que_content: 'What type of phone would you like to have ?' , types: 'radiobutton' , survey_id: MOBILE_SURVEY ,answer_options: 'Flip Phone \n Slide Phone \n Tough Phone \n Luxury Fashion Phone \n Smart Phone ')
+Question.create!(que_content: 'How important is the design or style (Look and Feel) of a mobile phone to you as opposed to functionality ?' , types: 'radiobutton' , survey_id: MOBILE_SURVEY ,answer_options: 'Not Important \n Fairly Important \n Very important \n Extremely important ')
+Question.create!(que_content: 'What size of the handset would you prefer ?' , types: 'textfield' , survey_id: MOBILE_SURVEY ,answer_options: '')
+Question.create!(que_content: 'What size would you prefer your screen to be ? ' , types: 'textfield' , survey_id: MOBILE_SURVEY ,answer_options: '')
+Question.create!(que_content: 'How much are you willing to spend on a mobile phone?' , types: 'textfield' , survey_id: MOBILE_SURVEY ,answer_options: '')
+Question.create!(que_content: 'How many working mobile or cell phones do you currently have?' , types: 'textfield' , survey_id: MOBILE_SURVEY ,answer_options: '')
+Question.create!(que_content: 'In a typical weekday, about how much time, in total, do you spend using your mobile or cell phone?' , types: 'textfield' , survey_id: MOBILE_SURVEY ,answer_options: '')
+Question.create!(que_content: 'Which of the following activities do you do on your mobile or cell phone? (Check all that apply)' , types: 'checkbox' , survey_id: MOBILE_SURVEY ,answer_options: 'Take photos \n Play videos (other than video games) \n Send or receive photos \n Send or receive texts \n Play music \n Purchase products or services \n General internet use (other than using social networking websites) \n Send or receive emails \n Record videos \n Play podcasts \n Send or receive videos \n Send or receive instant messages \n Make or receive phone calls \n Play games \n Use social networking websites ')
+Question.create!(que_content: 'Please list 3 media names that you use regularly(whether from TV, magazines, newspapers or websites, such as, TV: Pearl channel, Magazine: Businessweek)' , types: 'textarea' , survey_id: MOBILE_SURVEY ,answer_options: '')
+Question.create!(que_content: 'In a typical weekday, which of the following activities do you do on your mobile or cell phone most often?' , types: 'textfield' , survey_id: MOBILE_SURVEY ,answer_options: 'Take photos \n Play videos (other than video games) \n Send or receive photos \n Send or receive texts \n Play music \n Purchase products or services \n General internet use (other than using social networking websites) \n Send or receive emails \n Record videos \n Play podcasts \n Send or receive videos \n Send or receive instant messages \n Make or receive phone calls \n Play games \n Use social networking websites ')
 Question.create!(que_content: 'Nationality' , types: '1' , survey_id: '1' ,answer_options: '')
 
 
