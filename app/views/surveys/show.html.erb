@@ -1,3 +1,4 @@
+
 <h1><center>Results</center></h1>
 
 <html>
@@ -13,6 +14,7 @@
 	<th>Total Attempt</th>
 	<th>Count</th>
 	
+	
 </tr>
 <% sr_no=0 %>
 <% @question_results.map(&:question).uniq.each do |que| %>
@@ -22,48 +24,40 @@
 		<td>
  			<%= que.que_content %>
  		</td>
- 		<% @options = GivenAnswer.where(:question_id => que.id) %>
- 		<%################ Answer column ##############%>
- 		<td> 
- 			<ul>
- 				<% checkbox_array=[] %>				
- 				<% @options.map(&:answer).uniq.each do |option| %>
-
- 					<% if que.types == "checkbox" %>
- 						<% checkbox_array=checkbox_array + option.split('\n') %>
- 					<% else %>
- 						<li><%= option %></li>
- 					<% end %> 	
- 				<% end %>
- 				<% checkbox_array.uniq.each do |checkbox_ans| %>
-					<li><%= checkbox_ans %></li> 						
-				<% end %>
- 		</ul>
- 		</td>
- 		<%################ Total Attempt column ##############%>
- 	<td>				
- 		<%= @options.count %>
- 	</td>
- 	<%################ Answer count column ##############%>
- 	<td>	
- 		<% checkbox_array=[] %>	
- 		<%  @options.map(&:answer).uniq.each do |option| %>
- 			<% if que.types == "checkbox" %>
- 				<% checkbox_array=checkbox_array + option.split('\n') %>					
-			<% else %>			
- 				<% @counts = GivenAnswer.where(:answer => option) %>	
- 				<%= @counts.count %><br>		
- 			<% end%>
- 		<% end%>
- 				<% checkbox_array.uniq.each do |checkbox_ans| %>
- 					<%= checkbox_array.count(checkbox_ans) %><br>	
-				<% end %>
-
- 	</td> 	
- </tr>
+ 		<td>
+ 			<% checkbox_array=[] %>
+ 			<% @survey.given_answers.where(:question_id => que.id).group(:question_id , :answer).each do |answer_option| %>
+ 				<% if que.types=="checkbox" %>
+ 					 <% checkbox_array=checkbox_array|answer_option.answer.split('\n') %>
+ 				<% else %>
+ 				<%= answer_option.answer %><br>
+ 					<% end %>		
+ 			<% end %>
+ 			<% checkbox_array.each do |checkbox_ans| %>
+          		<%= checkbox_ans %><br>           
+        	<% end %> 					
+ 		</td>			
+ 		<td>				
+ 			<% @survey.given_answers.where(:question_id => que.id).group(:question_id).count.each do |key , value| %>
+ 				<%= value %>
+ 			<% end %>
+ 		</td>	
+	 	<td>
+	 	<% checkbox_array=[] %> 		
+	 		<% @survey.given_answers.where(:question_id => que.id).group(:question_id, :answer).count.each do |key ,value| %>
+	 			<% if que.types=="checkbox" %>
+	 				<% checkbox_array=checkbox_array + key[1].split('\n') %>
+	 			<% else %>		
+	 			 	<%= value %><br>
+	 			<% end %>	
+	 		<% end %>
+	 				<% checkbox_array.uniq.each do |checkbox_ans| %>
+	          			<%= checkbox_array.count(checkbox_ans) %><br>  
+	        	<% end %>	
+	 	</td>	
+ 	</tr>
 <% end %>
 </table>
-
 <%= link_to surveys_path, class: 'col-lg-2 col-lg-offset-4 btn btn-info' do %>
   <i class="glyphicon glyphicon-ok-circle"></i> Home
 <% end %>

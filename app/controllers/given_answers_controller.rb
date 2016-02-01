@@ -34,7 +34,7 @@ class GivenAnswersController < ApplicationController
           #raise params.inspect
           params[:given_answer].each do |question_id, given_answer_attributes|
             answer=given_answer_attributes[:answer_options]
-            answer == if answer.is_a?(Array)
+            if answer.is_a?(Array)
                 stripped_answers = strip_checkbox_answers(answer)
                 answer=stripped_answers.join('\n')    
                 else
@@ -48,9 +48,9 @@ class GivenAnswersController < ApplicationController
           redirect_to survey_given_answers_path(@survey)   
 
     end
-    def sample
-          params[ "given_answer"].map{|k,v| (v["answer_options"].is_a?(Array)? v["answer_options"].split("0").join('\n').to_s : v["answer_options"].to_s)}
-    end
+    # def sample
+    #       params[ "given_answer"].map{|k,v| (v["answer_options"].is_a?(Array)? v["answer_options"].split("0").join('\n').to_s : v["answer_options"].to_s)}
+    # end
 
     def strip_checkbox_answers(answer)
         answer.reject(&:blank?).reject { |t| t == "0" }

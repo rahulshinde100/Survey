@@ -45,8 +45,8 @@
 <% if user_signed_in? %>
 
   <% if current_user.id == User.first.id %>
-
-<%= link_to 'New Survey', new_survey_path , class: "btn btn-success" %>
+<%= link_to 'Test', test_index_path ,class: "btn btn-success" %>
+<%#= link_to 'New Survey', new_survey_path , class: "btn btn-success" %>
 <% end %>
 <% end %>
 </body>
